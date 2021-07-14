@@ -6,8 +6,6 @@ export {
 
 // optional shortcut to the mongoose.Schema class
 const Schema = mongoose.Schema
-const date = new Date()
-date.setFullYear( new Date().getFullYear() - 1 )
 
 const flightSchema = new Schema({
   airline: {
@@ -25,7 +23,7 @@ const flightSchema = new Schema({
   },
   departs: {
     type: Date,
-    default: new Date()
+    default: new Date(Date.now() + 365*24*60*60*1000)
   },
 }, {
   timestamps: true

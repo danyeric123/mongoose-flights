@@ -20,7 +20,7 @@
     </thead>
     <tbody>
       <% flights.forEach(flight => { %>
-        <tr>
+        <tr class=<%= flight.departs< Date.now()?"passed":"upcoming"%>>
           <td><%= flight.airline %></td>
           <td><%= flight.airport %></td>
           <td><%= flight.flightNo %></td>
