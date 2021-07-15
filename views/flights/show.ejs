@@ -38,7 +38,7 @@
             <td><%= ticket.seat %> </td>
             <td><%= ticket.price %> </td>
             <td><form 
-              action="/flights/<%= flight._id %>/tickets/<%= ticket._id %> ?_method=DELETE"
+              action="/flights/<%= flight._id %>/tickets/<%= ticket._id %>?_method=DELETE"
               class="delete-form"
               method="POST"
             >

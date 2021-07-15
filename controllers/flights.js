@@ -60,11 +60,15 @@ function indexflight(req,res){
 }
 
 function deleteTicket(req, res) {
-  console.log(`The id you get is ${req.params.id}`)
-  Flight.findById(req.url.split('/')[1], function(error, flight) {
-    // I don't know what to do here
-    flight.save(function(err) {
-      res.redirect(`/flights/${flight._id}`);
-    });
+  Flight.findById(req.params.flightId)
+  .then((flight) => {
+    flight.tickets.remove({_id: req.params.ticketId})
+    flight.save()
+    .then(() => {
+      res.redirect(`/flights/${flight._id}`)
+    })
+    .catch(err=>{
+      console.log(err)
+    })
   })
 }
