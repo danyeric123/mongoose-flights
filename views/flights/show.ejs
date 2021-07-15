@@ -12,7 +12,14 @@
     <ul>
         <% flight.destinations.forEach(destination => { %> 
             <li>
+                <form 
+                  action="/flights/<%= flight._id %>/destinations/<%= destination._id %>?_method=DELETE"
+                  class="delete-form"
+                  method="POST"
+                >
                 <%= destination.airport %> 
+                  <button class="btn btn-danger" type="submit">X</button>
+              </form>
             </li>
         <% }) %>
     </ul>
