@@ -1,0 +1,57 @@
+<%- include('../partials/html-head') %>
+<%- include('../partials/nav') %>
+
+<main>
+  <h1><%= title %></h1>
+  <section>
+    <div>Airline: <%= flight.airline %></div>
+    <div>Airport: <%= flight.airport %></div>
+    <div>Flight No.: <%= flight.flightNo %></div>
+    <div>Departs: <%= flight.departs %></div>
+  </section>
+  <br/>
+  <form 
+    id="add-ticket-form"
+    action="/flights/<%= flight._id %>/tickets"
+    method="POST"
+  >
+    <label for="seat">Seat:</label>
+    <input name="seat" required pattern="[A-F][1-9]\d?">
+    <label for="price">Price</label>
+    <input type="number" name="price" id="price">
+    <button type="submit">Add Ticket</button>
+  </form>
+  <section>
+    <h3> Tickets:</h3>
+    <% if (flight.tickets.length) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Seat</th>
+          <th>Price</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% flight.tickets.forEach(ticket => { %>
+          <tr>
+            <td><%= ticket.seat %> </td>
+            <td><%= ticket.price %> </td>
+            <td><form 
+              action="/flights/<%= flight._id %>/tickets/<%= ticket._id %> ?_method=DELETE"
+              class="delete-form"
+              method="POST"
+            >
+              <button class="btn btn-danger" type="submit">X</button>
+            </form></td>
+          </tr>
+        <% }); %> 
+      </tbody>
+    </table>
+    <% } else { %>
+      <h3>No Tickets Yet</h3>
+    <% } %>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

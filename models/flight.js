@@ -1,11 +1,25 @@
 import mongoose from 'mongoose'
 
 export {
-  Flight
+  Flight,
+  Ticket
 }
 
 // optional shortcut to the mongoose.Schema class
 const Schema = mongoose.Schema
+
+const ticketSchema = new Schema({
+  seat: {
+    type: String,
+    match: /[A-F][1-9]\d?/
+  },
+  price: {
+    type: Number,
+    min: 0
+  }
+})
+
+const Ticket = mongoose.model('Ticket', ticketSchema)
 
 const flightSchema = new Schema({
   airline: {
@@ -25,6 +39,7 @@ const flightSchema = new Schema({
     type: Date,
     default: new Date(Date.now() + 365*24*60*60*1000)
   },
+   tickets: [ticketSchema]
 }, {
   timestamps: true
 });
