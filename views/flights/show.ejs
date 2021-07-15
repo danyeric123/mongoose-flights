@@ -4,65 +4,87 @@
 <main>
   <h1><%= title %></h1>
   <section>
-    <div>Airline: <%= flight.airline %></div>
-    <div>Airport: <%= flight.airport %></div>
-    <div>Flight No.: <%= flight.flightNo %></div>
-    <div>Departs: <%= flight.departs %></div>
-    <div>Destinations:</div>
-    <ul>
-        <% flight.destinations.forEach(destination => { %> 
-            <li>
-                <form 
-                  action="/flights/<%= flight._id %>/destinations/<%= destination._id %>?_method=DELETE"
-                  class="delete-form"
-                  method="POST"
-                >
-                <%= destination.airport %> 
-                  <button class="btn btn-danger" type="submit">X</button>
-              </form>
-            </li>
-        <% }) %>
-    </ul>
+    <dl class="row">
+      <dt class="col-sm-3">Airline:</dt>
+      <dd class="col-sm-9"> <%= flight.airline %></dd>
+      <dt class="col-sm-3">Airport:</dt> 
+      <dd class="col-sm-9"><%= flight.airport %></dd>
+      <dt class="col-sm-3">Flight No.:</dt> 
+      <dd class="col-sm-9"><%= flight.flightNo %></dd>
+      <dt class="col-sm-3">Departs: </dt>
+      <dd class="col-sm-9"><%= flight.departs %></dd>
+      <dt class="col-sm-3">Destinations:</dt>
+      <dd class="col-sm-9">
+        <ul class="list-unstyled">
+          <% flight.destinations.forEach(destination => { %> 
+              <li>
+                  <form 
+                    action="/flights/<%= flight._id %>/destinations/<%= destination._id %>?_method=DELETE"
+                    class="delete-form"
+                    method="POST"
+                  >
+                  <%= destination.airport %> 
+                    <button class="btn btn-danger" type="submit">X</button>
+                </form>
+              </li>
+          <% }) %>
+      </ul>
+      </dd>
+    </dl>
   </section>
   <br/>
   <form 
-    id="add-ticket-form"
-    action="/flights/<%= flight._id %>/tickets"
-    method="POST"
-  >
-    <label for="seat">Seat:</label>
-    <input name="seat" required pattern="[A-F][1-9]\d?">
-    <label for="price">Price</label>
-    <input type="number" name="price" id="price">
-    <button type="submit">Add Ticket</button>
-  </form>
+      id="add-ticket-form"
+      action="/flights/<%= flight._id %>/tickets"
+      method="POST"
+    >
+  <div class="row g-3 align-items-center">
+    
+    <div class="col-auto">
+      <label class="col-form-label" for="seat">Seat:</label>
+    </div>
+    <div class="col-auto">
+      <input class="form-control" name="seat" required pattern="[A-F][1-9]\d?">
+    </div>
+    <div class="col-auto">
+      <label class="col-form-label" for="price">Price</label>
+    </div>
+    <div class="col-auto">
+      <input class="form-control" type="number" name="price" id="price">
+    </div> 
+    <div class="col-auto">
+      <button class="btn btn-success" type="submit">Add Ticket</button>
+    </div>
+  </div>
+</form>
+ 
   <section>
-    <h3> Tickets:</h3>
     <% if (flight.tickets.length) { %>
-    <table>
-      <thead>
-        <tr>
-          <th>Seat</th>
-          <th>Price</th>
-          <th>Remove</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% flight.tickets.forEach(ticket => { %>
+      <table class="table table-bordered caption-top table-hover table-info">
+        <thead>
+          <caption>Tickets:</caption>
           <tr>
-            <td><%= ticket.seat %> </td>
-            <td><%= ticket.price %> </td>
-            <td><form 
-              action="/flights/<%= flight._id %>/tickets/<%= ticket._id %>?_method=DELETE"
-              class="delete-form"
-              method="POST"
-            >
-              <button class="btn btn-danger" type="submit">X</button>
-            </form></td>
+            <th scope="col">Seat</th>
+            <th scope="col">Price</th>
+            <th scope="col">Remove</th>
           </tr>
-        <% }); %> 
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% flight.tickets.forEach(ticket => { %>
+            <tr>
+              <td><%= ticket.seat %> </td>
+              <td><%= ticket.price %> </td>
+              <td><form 
+                action="/flights/<%= flight._id %>/tickets/<%= ticket._id %>?_method=DELETE"
+                class="delete-form"
+                method="POST"
+              >
+                <button class="btn btn-danger" type="submit">X</button>
+              </form></td>
+            </tr>
+          <% }); %> 
+        </tbody>
+      </table>
     <% } else { %>
       <h3>No Tickets Yet</h3>
     <% } %>
@@ -76,7 +98,7 @@
           <%  }) %> 
         </select>
       </label>
-      <button type="submit">Add Destination</button>
+      <button class="btn btn-success" type="submit">Add Destination</button>
     </form>
   </section>
 </main>

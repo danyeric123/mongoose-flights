@@ -1,19 +1,19 @@
 <%- include('../partials/html-head') %>
 <%- include('../partials/nav') %>
   <h1>Flight List</h1>
-  <table>
-    <thead>
+  <table class="table table-bordered table-hover">
+    <thead class="table-dark">
       <tr>
-        <th>Airline</th>
-        <th>Airport</th>
-        <th>Flight No.</th>
-        <th>Departs</th>
-        <th>Details</th>
+        <th scope="col">Airline</th>
+        <th scope="col">Airport</th>
+        <th scope="col">Flight No.</th>
+        <th scope="col">Departs</th>
+        <th scope="col">Details</th>
       </tr>
     </thead>
     <tbody>
       <% flights.forEach(flight => { %>
-        <tr class=<%= flight.departs< Date.now()?"passed":"upcoming"%>>
+        <tr class=<%= flight.departs< Date.now()?"table-danger":"table-success"%>>
           <td><%= flight.airline %></td>
           <td><%= flight.airport %></td>
           <td><%= flight.flightNo %></td>

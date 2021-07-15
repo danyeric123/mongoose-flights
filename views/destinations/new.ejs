@@ -1,16 +1,17 @@
+<%- include('../partials/html-head') %>
 <%- include('../partials/nav') %>
   <h1>Enter a New Destination</h1>
   <form action="/destinations" method="POST">
     <label for="airport-input">Destination:
     </label>
     <input type="text" name="airport" id="airport-input">
-    <button type="submit">Add Destination</button>
+    <button class="btn btn-primary" type="submit">Add Destination</button>
   </form>
   <br>
   <h3><%= message?"Destination already exists!":"" %> </h3>
   <h3>List of Destinations:</h3>
   <% if(destinations.length){ %>
-    <ul>
+    <ul class="list-unstyled align-items-justify">
       <% destinations.forEach(destination=>{ %>
         <li><%= destination.airport %> </li>
       <% }) %> 
