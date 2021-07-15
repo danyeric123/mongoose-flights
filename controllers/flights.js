@@ -1,7 +1,7 @@
 import { Flight} from '../models/flight.js'
 
 export {
-  newflight as new,
+  newFlight as new,
   create,
   indexflight as index,
   show,
@@ -42,11 +42,11 @@ function create(req, res) {
   
 }
 
-function newflight(req, res) {
+function newFlight(req, res) {
   const newFlight = new Flight();
   const dt = newFlight.departs
   const departsDate = dt.toISOString().slice(0, 16);
-  res.render('flights/new',{title: "Add Movie", departsDate});
+  res.render('flights/new',{title: "Add Flight", departsDate});
 }
 
 function indexflight(req,res){

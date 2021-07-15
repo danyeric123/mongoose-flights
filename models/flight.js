@@ -36,6 +36,10 @@ const flightSchema = new Schema({
     type: Date,
     default: new Date(Date.now() + 365*24*60*60*1000)
   },
+  destinations: {
+    type: Schema.Types.ObjectId,
+    ref: 'Destination'
+  },
    tickets: [ticketSchema]
 }, {
   timestamps: true

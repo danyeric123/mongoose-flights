@@ -52,6 +52,17 @@
       <h3>No Tickets Yet</h3>
     <% } %>
   </section>
+  <section>
+    <form action="/flights/<%= flight._id %>/destinations" method="post">
+      <label for="destinationId">
+        <select name="destinationId" id="destination-input">
+          <% destinations.forEach(destination=>{ %>
+            <option value="<%= destination._id %> "><%= destination.airport %> </option>
+          <%  }) %> 
+        </select>
+      </label>
+    </form>
+  </section>
 </main>
 
 <%- include('../partials/footer') %>

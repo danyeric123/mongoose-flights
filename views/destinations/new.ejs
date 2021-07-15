@@ -1,0 +1,19 @@
+<%- include('../partials/nav') %>
+  <h1>Enter a New Destination</h1>
+  <form action="/destinations" method="POST">
+    <label for="airport-input">Destination:
+    </label>
+    <input type="text" name="airport" id="airport-input">
+    <button type="submit">Add Destination</button>
+  </form>
+  <h3>List of Destinations:</h3>
+  <% if(destinations.length){ %>
+    <ul>
+      <% destinations.forEach(destination=>{ %>
+        <li><%= destination.airport %> </li>
+      <% }) %> 
+    </ul>
+  <% } else { %>
+    <p>No Destinations</p>
+  <% } %> 
+  <%- include('../partials/footer') %>
