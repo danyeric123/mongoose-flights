@@ -2,7 +2,6 @@ import mongoose from 'mongoose'
 
 export {
   Flight,
-  Ticket
 }
 
 // optional shortcut to the mongoose.Schema class
@@ -18,8 +17,6 @@ const ticketSchema = new Schema({
     min: 0
   }
 })
-
-const Ticket = mongoose.model('Ticket', ticketSchema)
 
 const flightSchema = new Schema({
   airline: {
