@@ -8,6 +8,14 @@
     <div>Airport: <%= flight.airport %></div>
     <div>Flight No.: <%= flight.flightNo %></div>
     <div>Departs: <%= flight.departs %></div>
+    <div>Destinations:</div>
+    <ul>
+        <% flight.destinations.forEach(destination => { %> 
+            <li>
+                <%= destination.airport %> 
+            </li>
+        <% }) %>
+    </ul>
   </section>
   <br/>
   <form 
@@ -54,13 +62,14 @@
   </section>
   <section>
     <form action="/flights/<%= flight._id %>/destinations" method="post">
-      <label for="destinationId">
+      <label for="destinationId">Add Destination to Flight
         <select name="destinationId" id="destination-input">
           <% destinations.forEach(destination=>{ %>
-            <option value="<%= destination._id %> "><%= destination.airport %> </option>
+            <option value="<%= destination._id %>"><%= destination.airport %> </option>
           <%  }) %> 
         </select>
       </label>
+      <button type="submit">Add Destination</button>
     </form>
   </section>
 </main>

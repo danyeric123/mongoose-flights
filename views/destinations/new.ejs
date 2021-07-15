@@ -6,6 +6,8 @@
     <input type="text" name="airport" id="airport-input">
     <button type="submit">Add Destination</button>
   </form>
+  <br>
+  <h3><%= message?"Destination already exists!":"" %> </h3>
   <h3>List of Destinations:</h3>
   <% if(destinations.length){ %>
     <ul>

@@ -10,16 +10,29 @@ function newDestination(req, res) {
              .then(destinations=>{
               res.render('destinations/new', {
                 title: 'Add Destinations',
-               destinations,
+                destinations,
+                message: false
               })
             })
             .catch(err=>console.log(err))
 }
 
 function create(req,res){
-  Destination.create(req.body)
+  if(!Destination.exists(req.body)){
+    Destination.create(req.body)
              .then(destination=>{
               res.redirect('/destinations/new')
              })
              .catch(err=>console.log(err))
+  }else{
+    Destination.find({})
+    .then(destinations=>{
+     res.render('destinations/new', {
+       title: 'Add Destinations',
+       destinations,
+       message: true
+     })
+   })
+   .catch(err=>console.log(err))
+  }
 }

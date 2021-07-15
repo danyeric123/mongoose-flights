@@ -1,3 +1,4 @@
+import { Destination } from '../models/destination.js'
 import { Flight} from '../models/flight.js'
 
 export {
@@ -7,15 +8,33 @@ export {
   show,
   createTicket,
   deleteTicket,
+  addDestination,
 }
 
 function show(req, res) {
-  Flight.findById(req.params.id, function (err, flight) {
-    res.render('flights/show', { 
-      title: 'Flight Detail', 
-      flight: flight,
-    })
-  })
+  Flight.findById(req.params.id)
+        .populate("destinations")
+        .exec(function (err, flight) {
+          Destination.find({_id: {$nin: flight.destination}})
+          .then(destinations=>{
+            res.render('flights/show', { 
+              title: 'Flight Detail', 
+              flight,
+              destinations,
+              error:err
+            })
+          })
+        })
+
+}
+
+function addDestination(req,res){
+  Flight.findById(req.params.id, function(err, flight) {
+    flight.destinations.push(req.body.destinationId);
+    flight.save(function(err) {
+      res.redirect(`/flights/${flight._id}`);
+    });
+  });
 }
 
 function createTicket(req, res) {
