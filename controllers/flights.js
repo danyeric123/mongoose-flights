@@ -22,7 +22,6 @@ function show(req, res) {
               title: 'Flight Detail', 
               flight,
               destinations,
-              error:err
             })
           })
         })

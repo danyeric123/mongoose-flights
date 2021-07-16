@@ -18,9 +18,9 @@
           <td><%= flight.airport %></td>
           <td><%= flight.flightNo %></td>
           <td><%= flight.departs %></td>
-          <td><a href="/flights/<%= flight._id %>">Details</a></td>
+          <td><a href="/flights/<%= flight._id %>" class="link-dark">Details</a></td>
         </tr>
       <% }); %>
   </table>
-  <a href="/">Go Back</a>
+  <!-- <a href="/" class="link-info">Go Back</a> -->
   <%- include('../partials/footer') %>
