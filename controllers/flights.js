@@ -15,7 +15,7 @@ export {
 function show(req, res) {
   Flight.findById(req.params.id)
         .populate("destinations")
-        .exec(function (err, flight) {
+        .then(flight=> {
           Destination.find({_id: {$nin: flight.destinations}})
           .then(destinations=>{
             res.render('flights/show', { 
@@ -24,6 +24,10 @@ function show(req, res) {
               destinations,
             })
           })
+        })
+        .catch(err => {
+          console.log(err)
+          res.redirect("/")
         })
 
 }

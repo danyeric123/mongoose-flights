@@ -14,7 +14,10 @@ function newDestination(req, res) {
                 message: false
               })
             })
-            .catch(err=>console.log(err))
+            .catch(err => {
+              console.log(err)
+              res.redirect("/")
+            })
 }
 
 function create(req,res){
@@ -23,7 +26,10 @@ function create(req,res){
              .then(destination=>{
               res.redirect('/destinations/new')
              })
-             .catch(err=>console.log(err))
+             .catch(err => {
+              console.log(err)
+              res.redirect("/")
+            })
   }else{
     Destination.find({})
     .then(destinations=>{
@@ -33,6 +39,9 @@ function create(req,res){
        message: true
      })
    })
-   .catch(err=>console.log(err))
+   .catch(err => {
+    console.log(err)
+    res.redirect("/")
+  })
   }
 }
